@@ -1,0 +1,66 @@
+:443 {
+	@gateway client_cert {
+		verified
+		subject_organization Edge-Gateway Ops
+		subject_organizational_unit team-blue
+	}
+	respond @gateway "routed by client cert"
+
+	@fallback client_cert {
+		verified false
+	}
+	respond @fallback "no verified client cert"
+}
+----------
+{
+	"apps": {
+		"http": {
+			"servers": {
+				"srv0": {
+					"listen": [
+						":443"
+					],
+					"routes": [
+						{
+							"match": [
+								{
+									"client_cert": {
+										"verified": true,
+										"subject_organization": [
+											"Edge-Gateway",
+											"Ops"
+										],
+										"subject_organizational_unit": [
+											"team-blue"
+										]
+									}
+								}
+							],
+							"handle": [
+								{
+									"body": "routed by client cert",
+									"handler": "static_response"
+								}
+							]
+						},
+						{
+							"match": [
+								{
+									"client_cert": {
+										"verified": false
+									}
+								}
+							],
+							"handle": [
+								{
+									"body": "no verified client cert",
+									"handler": "static_response"
+								}
+							]
+						}
+					]
+				}
+			}
+		}
+	}
+}
