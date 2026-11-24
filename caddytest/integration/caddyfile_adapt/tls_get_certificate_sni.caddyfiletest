@@ -1,0 +1,79 @@
+sni-one.test, sni-two.test, sni-three.test {
+	tls {
+		get_certificate sni {
+			directory /etc/caddy/sni-certs
+			reload_interval 30m
+			cert sni-one.test /etc/caddy/explicit/sni-one.crt /etc/caddy/explicit/sni-one.key
+		}
+	}
+	respond "ok"
+}
+----------
+{
+	"apps": {
+		"http": {
+			"servers": {
+				"srv0": {
+					"listen": [
+						":443"
+					],
+					"routes": [
+						{
+							"match": [
+								{
+									"host": [
+										"sni-one.test",
+										"sni-two.test",
+										"sni-three.test"
+									]
+								}
+							],
+							"handle": [
+								{
+									"handler": "subroute",
+									"routes": [
+										{
+											"handle": [
+												{
+													"body": "ok",
+													"handler": "static_response"
+												}
+											]
+										}
+									]
+								}
+							],
+							"terminal": true
+						}
+					]
+				}
+			}
+		},
+		"tls": {
+			"automation": {
+				"policies": [
+					{
+						"subjects": [
+							"sni-one.test",
+							"sni-three.test",
+							"sni-two.test"
+						],
+						"get_certificate": [
+							{
+								"certificates": {
+									"sni-one.test": {
+										"cert_file": "/etc/caddy/explicit/sni-one.crt",
+										"key_file": "/etc/caddy/explicit/sni-one.key"
+									}
+								},
+								"directory": "/etc/caddy/sni-certs",
+								"reload_interval": 1800000000000,
+								"via": "sni"
+							}
+						]
+					}
+				]
+			}
+		}
+	}
+}

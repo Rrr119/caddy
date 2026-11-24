@@ -1,0 +1,18 @@
+{
+  "uid": "36792",
+  "harness": "Codex CLI",
+  "snapshotUrl": "https://github.com/Rrr119/caddy/commit/173f4592d3e1a98106cd90ad6767201cfaa8a415",
+  "harnessVersion": "codex-cli 0.167.2",
+  "operatingSystem": "Ubuntu 26.04.1 LTS",
+  "operatingSystemCell": [
+    "MacOS/Linux"
+  ],
+  "outputDirectory": "/home/dev/feedback/uid36792",
+  "wslDistro": "Ubuntu-26.04",
+  "B": {
+    "success": false,
+    "canceled": true,
+    "error": "任务已取消",
+    "side": "B"
+  }
+}

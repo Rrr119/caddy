@@ -1,0 +1,17 @@
+{
+  "root": "/home/dev/feedback/uid36792",
+  "B": "/home/dev/feedback/uid36792",
+  "sha": "173f4592d3e1a98106cd90ad6767201cfaa8a415",
+  "wslDistro": "Ubuntu-26.04",
+  "source": {
+    "owner": "caddyserver",
+    "repo": "caddy",
+    "sha": "173f4592d3e1a98106cd90ad6767201cfaa8a415"
+  },
+  "fork": {
+    "owner": "Rrr119",
+    "repo": "caddy",
+    "cloneUrl": "https://github.com/Rrr119/caddy.git"
+  },
+  "at": "2026-11-24T18:12:51.777Z"
+}
